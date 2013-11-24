@@ -1,17 +1,103 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="superhero">
 
   <head>
-    <script src="angular.js"></script>
-    <script src="controllers.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+    <script src="main.js"></script>
+    <script src="directives.js"></script>
+    <script src="controllers.js"></script>
   </head>
-  
-  <body>
-   <div ng-controller='HelloController'>
-   <input ng-model='greeting.text'>
-   <p>{{greeting.text}}, World</p>
-   </div>
-  </body>
+
+  <!-- element directive -->
+  <superman></superman>
+
+  <!-- class directive -->
+  <!-- <div class="flying"></div> -->
+
+  <!-- attribute directive -->
+  <div working>wahhoo</div>
+
+  <!-- attribute directive -->
+  <div enter="gosdo">yahhoo</div>
+
+  <div ng-controller="bambi" ng-click="runFree()">help bambi escape</div>
+
+  <kittennoise kitten>Make it meow</kittennoise>
+
+  <wat>
+    <!-- the `wat` directive uses transclusion so this span will show up! -->
+    <span class="inside">inside!-- transcluded</span>
+  </wat>
+
+  <clock timezone="MST"></clock>
+
+  <!-- 
+    the id attribute is the URL key that Angular uses to store the template. 
+    Use this id later in the directive’s templateUrl to specify which template to insert.
+    This must be inside of the ng-app module
+  -->
+  <script type='text/ng-template' id='helloTemplateInline.html'>
+    <div>Hi there</div>
+  </script>
+  <sup>
+    <!-- The div below will be replaced by the template above -->
+    <div>heddu</div>
+  </sup>
+
+  <heddu>
+    <!-- The div below will be replaced by a template from a file -->
+    <div> yo </div>
+  </heddu>
+
+  <!-- Instead you can use an app.run to store a template from the beginning -->
+  <wazza>
+
+  </wazza>
+
+  <kid></kid>
+  <br>
+  <kid></kid>
+
+  <div ng-controller="KidCtrl">
+    <chiddy done="logChore(chore)"></chiddy>
+  </div>
+
+  <div ng-controller="FlavorCtrl">
+    <span type="text" ng-model="ctrlFlavor">The flavor is: {{ ctrlFlavor }}</span>  
+  </div>
+
+  <div ng-controller="PhoneCtrl">
+    <phone number="555-1234" network="network" make-call="leaveVoicemail(number, message)"></phone>
+    <phone number="867-5309" network="network" make-call="leaveVoicemail(number, message)"></phone>
+    <phone number="911" network="network" make-call="leaveVoicemail(number, message)"></phone>
+  </div>
+
+  <!-- the blocks use the same ctrl but have their own scope -->
+  <div ng-controller="EventCtrl">
+    <div>Counter {{count}}</div>
+    <button ng-click="$broadcast('adding')">Add 1</button>
+    <!-- this child div has its own scope, but catches the broadcast event and increments -->
+    <div ng-controller="EventCtrl">
+      <div>Counter {{count}}</div>
+      <button ng-click="increment()">Add 1</button>
+    </div>
+  </div>
+  <div ng-controller="EventCtrl">
+    <div>Counter {{count}}</div>
+    <button ng-click="increment()">Add 1</button>
+    <!-- this child div has its own scope, but emits an event that increments its parent count-->
+    <div ng-controller="EventCtrl">
+      <div>Counter {{count}}</div>
+      <button ng-click="$emit('adding')">Add 1</button>
+    </div>
+  </div>
+
+  <!-- Using the watch on count to log increases in clicks -->
+  <div ng-controller="WatchCtrl">
+    <div ng-click="addOne()">
+      {{ count }}
+    </div>
+  </div>
 
 </html>

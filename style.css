@@ -1,0 +1,15 @@
+body {
+  color: green;
+}
+
+.gosdo {
+  color: red;
+}
+
+.outside {
+  background-color: yellow;
+}
+
+.inside {
+  background-color: pink;
+}
